@@ -1,0 +1,8 @@
+.example-margin {
+    margin: 0 10px;
+  }
+.card-header{
+    font-size:25px; font-family: auto;
+    background-color: darkslategray;
+    color: cornsilk;
+}

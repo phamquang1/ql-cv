@@ -1,0 +1,63 @@
+<div >
+    <div class="row clearfix ncc_wminwwidth" >
+        <div class="content-header content-profile col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    {{title | translate}}
+                </div>
+                <div class="card-body max-height">
+                    <div class="row clearfix">
+                        <div class="col-md-2">
+                            <mat-form-field appearance="outline" class="w-100 h-50" autocomplete="off">
+                                <mat-label style="font-size: 12px;">{{'child1.educationDialog.start' | translate}}</mat-label>
+                                <input matInput [(ngModel)]="education.startYear" name="startYear" required>
+                              </mat-form-field>
+                             
+                        </div>
+                        <div class="col-md-2">
+                            <mat-form-field appearance="outline" class="w-100 h-50" autocomplete="off">
+                                <mat-label style="font-size: 12px;">{{'child1.educationDialog.end' | translate}}</mat-label>
+                                <input matInput [(ngModel)]="education.endYear" name="endYear" required>
+                              </mat-form-field>
+                             
+                        </div>
+                        <div class="col-md-8">
+                            <mat-form-field appearance="outline" class="w-100" autocomplete="off">
+                                <mat-label style="font-size: 12px;">{{'child1.educationDialog.school' | translate}}</mat-label>
+                                <textarea matInput [(ngModel)]="education.schoolOrCenterName" name="schoolOrCenterName" required></textarea>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"> </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <mat-form-field appearance="outline" class="w-100" >
+                                <mat-label style="font-size: 12px;">{{'child1.educationDialog.degree' | translate}}</mat-label>
+                                <mat-select [(ngModel)]="education.degreeType" name="degreeType">
+                                  <mat-option *ngFor="let edu of listDegree.options" [value]="edu.id">{{edu.value}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <mat-form-field class="example-full-width w-100" appearance="outline" autocomplete="off">
+                                <mat-label style="font-size: 12px;">{{'child1.educationDialog.field' | translate}}</mat-label>
+                                <input matInput [(ngModel)]="education.major" name="major" required>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row clearfix" style="float: right;">
+                <button type="button" class="btn btn-danger" (click)="submitEducation()" 
+                    style="margin-right: 10px;">{{'child1.save' | translate}}</button>
+                <button type="button" class="btn btn-secondary" mat-dialog-close>{{'child1.cancel' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

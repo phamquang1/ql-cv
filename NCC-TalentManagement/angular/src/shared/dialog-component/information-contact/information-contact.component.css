@@ -1,0 +1,28 @@
+input[type="file"] {
+    display: none;
+
+} 
+.ncc_wminwwidth{
+    min-width: 600px;
+}
+.max-height{
+    max-height: 70vh;
+    overflow: scroll;
+    overflow-x: initial;
+}
+.max-height::-webkit-scrollbar {
+    background-color: #f7f9fc;
+    width: 3px;
+}
+.profile-avt img {
+    max-width: 90%;
+    max-height: 200px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+.w-100{
+    width: 100%;
+}
+.card-header{
+    font-size: 25px; font-family: auto;
+}

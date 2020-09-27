@@ -1,0 +1,120 @@
+<div>
+    <div class="row clearfix ncc_wminwwidth">
+        <div class="content-header content-profile col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    {{title | translate}}
+                </div>
+                <div class="card-body max-height" [formGroup]="stateForm"> 
+                    <div class="row" *ngIf="isSale && !isUser">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width search-tech" style="width: 100%;" appearance="outline"
+                                autocomplete="off">
+                                <mat-label>{{'child1.workingDialog.searchTech' | translate}}</mat-label>
+                                <input matInput  formControlName="search" name="search" autocomplete="off" 
+                                (keyup.enter)="searchByTechnologies(stateForm.get('search').value)">
+                                <i class="fas fa-search" (click)="searchByTechnologies(stateForm.get('search').value)"></i>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">  </div>
+                    </div>
+                    <div class="row clearfix" >
+                        <div class="col-md-3">
+                            <mat-form-field style="width: 100%;" appearance="outline" autocomplete="off">
+                                <mat-label>{{'child1.workingDialog.start' | translate}}</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="startTime" name="startTime">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field style="width: 100%;" appearance="outline" autocomplete="off" 
+                            *ngIf=" !stateForm.get('currentlyWorking').value ">
+                                <mat-label>{{'child1.workingDialog.end' | translate}}</mat-label>
+                                <input matInput [matDatepicker]="picker2" formControlName="endTime" name="endtime">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+                            <p *ngIf="stateForm.get('currentlyWorking').value "  style="width: 100%; display: block;padding: 10px 10px;
+                            "> {{'child1.workingDialog.now' | translate}}</p>
+                        </div>
+                        <div class="col-md-6" >
+                            <!-- *ngIf="!isSale" -->
+                            <mat-form-field  class="example-full-width" style="width: 100%;" appearance="outline" *ngIf="!isSale">
+                                <mat-label>{{'child1.workingDialog.project' | translate}}</mat-label>
+                                <input matInput  formControlName="projectName" name="projectName" autocomplete="off">
+                            </mat-form-field>
+
+                            <!-- *ngIf="isSale" -->
+                            <mat-form-field class="example-full-width" appearance="outline" *ngIf="isSale"
+                                    style="width: 100%;">
+                                    <mat-label>{{'child1.workingDialog.project' | translate}}</mat-label>
+                                    <input type="text" formControlName="projectName" name="projectName" 
+                                        [matAutocomplete]="auto"
+                                        autocomplete="off" matInput>
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let lis of listTechnologies ; let i = index" [value]="lis.projectName" (click)="selectedProjectName(lis)">
+                                            {{lis.projectName}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                      
+                        <div class="col-md-6">
+                            <section class="example-section" >
+                                <mat-checkbox class="example-margin" formControlName="currentlyWorking">{{'child1.workingDialog.currentWorking' | translate}}</mat-checkbox>
+                            </section>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline">
+                                <mat-label>{{'child1.workingDialog.techologies' | translate}}</mat-label>
+                                <input matInput  formControlName="technologies" name="technologies" autocomplete="off">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline" autocomplete="off">
+                                <mat-label>{{'child1.workingDialog.position' | translate}}</mat-label>
+                                <input matInput  formControlName="position" name="position" autocomplete="off" >
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline"
+                                autocomplete="off">
+                                <mat-label>{{'child1.workingDialog.description' | translate}}</mat-label>
+                                <textarea matInput  formControlName="projectDescription" 
+                                    name="projectDesciption"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline"
+                                autocomplete="off">
+                                <mat-label>{{'child1.workingDialog.responsibility' | translate}}</mat-label>
+                                <textarea matInput  formControlName="responsibility"
+                                    name="responsibility"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix" style="float: right;">
+                <button type="button" class="btn btn-danger" (click)="submitWorkingExp()"
+                    style="margin-right: 10px;">{{'child1.save' | translate}}</button>
+                <button type="button" class="btn btn-secondary" mat-dialog-close>{{'child1.cancel' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

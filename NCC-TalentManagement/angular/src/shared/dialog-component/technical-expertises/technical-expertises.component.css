@@ -1,0 +1,54 @@
+input[type="file"] {
+    display: none;
+
+} 
+.ncc_wminwwidth{
+    min-width: 600px;
+    
+}
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+.max-height{
+    max-height: 70vh;
+    overflow: scroll;
+    overflow-x: initial;
+}
+.max-height::-webkit-scrollbar {
+    background-color: #f7f9fc;
+    width: 3px;
+}
+.profile-avt img {
+    max-width: 90%;
+    max-height: 200px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+.w-100{
+    width: 100%;
+}
+.title{
+    font-size: 25px;
+}
+.technical{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fas , .fa{
+    cursor: pointer;
+}
+.fa-plus{
+    cursor: pointer;
+    color:  brown!important;
+}
+.fas{
+   color:  brown!important;
+}
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
+::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+}

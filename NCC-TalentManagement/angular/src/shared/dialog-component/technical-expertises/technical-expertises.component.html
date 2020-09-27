@@ -1,0 +1,86 @@
+<div class="row clearfix ncc_wminwwidth"  (click)="matOption = true">
+    <div class="content-header content-profile col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card " >
+            <div class="card-header title" >
+                <div class="row">
+                    <div class="col-md-6" style="width: 100%; font-size: 25px; font-family: auto;">
+                        {{title | translate}}
+                    </div>
+                    <div class="col-md-6" align="end">
+                        <i class="fa fa-plus icon icon-add mx-2 cursor-pointer" (click)="addgroupSkills()" aria-hidden="true" ></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body max-height">
+                <!----màn hình edit-->
+                <div class="row" *ngFor="let item of listData.groupSkills">
+                    <div class="col-md-4" >
+                        <mat-form-field class="example-full-width" appearance="outline" style="width: 90%;" *ngIf="item.cvSkills.length">
+                            <mat-label>{{ 'child1.technicalDialog.group' | translate}}</mat-label>
+                            <input  type="text" [(ngModel)]="item.name" aria-label="Number" matInput required [matAutocomplete]="auto" >
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <span *ngIf="matOption">
+                                    <mat-option *ngFor="let gr of listGroupSkill" [value]="gr.name" (click)="changeGroupSkillId(gr.id , item)">
+                                        {{gr.name}}
+                                    </mat-option>
+                                </span>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row" *ngFor="let i of item.cvSkills ; let index = index">
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width" appearance="outline"
+                                    style="width: 90%;">
+                                    <mat-label>{{'child1.technicalDialog.skill' | translate}}</mat-label>
+                                    <input type="text" [(ngModel)]="i.skillName" aria-label="Number" matInput
+                                        [matAutocomplete]="auto"
+                                        (click)="getSkillByGroupSkillId(item.groupSkillId)"
+                                        name="skillName {{index}}">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let lis of listSkill" [value]="lis.name" (click)="changeListSkillId(lis.id ,i , item)">
+                                            {{lis.name}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-5">
+                                <mat-form-field class="example-full-width" style="width: 90%;"
+                                    appearance="outline">
+                                    <mat-label>{{'child1.technicalDialog.level' | translate}}</mat-label>
+                                    <!-- <input matInput [(ngModel)]="i.level" name="level {{index}}" autocomplete="off" min="0" max="10" type="number"> -->
+                                    <mat-select [(ngModel)]="i.level">
+                                        <mat-option [value]="">None</mat-option>
+                                        <mat-option [value]="0">0</mat-option>
+                                        <mat-option [value]="1"> 1</mat-option>
+                                        <mat-option [value]="2">2</mat-option>
+                                        <mat-option [value]="3">3</mat-option>
+                                        <mat-option [value]="4">4</mat-option>
+                                        <mat-option [value]="5">5</mat-option>
+                                        <mat-option [value]="6">6</mat-option>
+                                        <mat-option [value]="7">7</mat-option>
+                                        <mat-option [value]="8">8</mat-option>
+                                        <mat-option [value]="9">9</mat-option>
+                                        <mat-option [value]="10">10</mat-option>
+                                      </mat-select>
+                                    <mat-hint align="end">{{i.level}} / 10</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-1 technical">
+                                <i class="fas fa-trash-alt" (click)="deleteCvSkill(item,i)"></i>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="item.cvSkills.length" style="padding-bottom: 10px;">
+                            <i class="fa fa-plus icon icon-add mx-2 cursor-pointer" (click)="addCvSkill(item)" aria-hidden="true" ></i>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix" style="text-align: end; float: right;">
+            <button type="button" class="btn btn-danger"(click)="saveExpertise()"  style="margin-right: 10px;">{{'child1.save' | translate}}</button>
+            <button type="button" class="btn btn-secondary" mat-dialog-close>{{'child1.cancel' | translate}}</button>
+        </div>
+    </div>
+</div>

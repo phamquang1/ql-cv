@@ -1,0 +1,68 @@
+.card-title{
+    font-size: 20px;
+    color:brown;
+    font-family: auto;
+}
+.w-80{
+    width: 80%;
+}
+.fa-times{
+    cursor: pointer;
+}
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important; width: 300px;}
+::ng-deep .mat-form-field-label-wrapper { top: -1.5em; font-size: 14px;}
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 143.33333%;
+}
+.content-gachchan{
+    border-bottom: 3px solid brown!important;
+}
+.wapper-img{
+    transition: 0.3s;
+}
+.wapper-img:hover{
+    z-index: 9999;
+    transition: 0.3s;
+    
+}
+.wapper-img:hover img:hover{
+    z-index: 999;
+    transform: scale(1.5);
+    transition: 0.3s;
+    border: 1px solid black;
+    box-shadow: -1px -8px 55px 17px rgba(0,0,0,0.15);
+}
+.wapper-img:hover img:nth-child(1){
+    z-index: 999;
+    transform: scale(1.5);
+    transition: 0.3s;
+    border: 1px solid black;
+    box-shadow: -1px -8px 55px 17px rgba(0,0,0,0.15);
+    margin-left: 70px;
+}
+.wapper-img:nth-child(4):hover img:nth-child(1){
+    z-index: 999;
+    transform: scale(1.5);
+    transition: 0.3s;
+    border: 1px solid black;
+    box-shadow: -1px -8px 55px 17px rgba(0,0,0,0.15);
+    margin-left: -70px;
+}
+.wapper-img:nth-child(8):hover img:nth-child(1){
+    z-index: 999;
+    transform: scale(1.5);
+    transition: 0.3s;
+    border: 1px solid black;
+    box-shadow: -1px -8px 55px 17px rgba(0,0,0,0.15);
+    margin-left: -70px;
+}
+.wapper-img:hover img:not(:hover){
+    z-index: 1;
+    filter: grayscale(80%);
+    transition: 0.3s;
+}
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }

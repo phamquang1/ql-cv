@@ -1,0 +1,238 @@
+<div style="padding-left: 10px; padding-right: 5px;">
+    <section class="content-header ">
+        <div class="container-fluid content-gachchan">
+            <div class="row pb-2">
+                <div class="col-8" style="font-family: auto;">
+                    <h1>{{ 'childrenMenu.child1' | translate }} : {{employeeName}}</h1>
+                </div>
+                <div class="col-4 text-right">
+                    <button class="btn btn-danger" style="margin-right: 5px;" (click)="EditAsSale()" *ngIf="isSale && !isUser"> 
+                    <a >{{ 'child1.editSale' | translate}}</a>
+                    </button>
+                   <button class="btn btn-danger" (click) = "showDialogExport()"> <i class="fas fa-download text-white"></i>
+                    {{ 'child1.export' | translate}}</button>
+                   <button type="button" class="btn btn-secondary" style="margin-left: 5px" 
+                   *ngIf="isEmployee || editAsSale" (click) = "exitEmployee()"><i class="fas fa-reply" style=" margin-right: 5px;"></i>
+                    {{ 'child1.exit' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--avartar---->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="col-md-12 text-right" *ngIf="(!isEmployee && isUser) || (isEmployee && isUser) || editAsSale">
+                        <a><i class="fas fa-edit icon icon-add mx-2 cursor-pointer" aria-hidden="true"
+                                (click)="showDialogCreatEdit(inform)"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img class="img-avt" src="{{urlImg + '/' + inform.imgPath}}" alt=""
+                                *ngIf="inform && inform.imgPath">
+                        </div>
+                        <div class="col-md-8">
+                            <ul style="list-style-type:none" class="profile-contact"
+                                *ngIf="inform && inform.currentPosition ">
+                                <h4>{{employeeName}}</h4>
+                                <li class="text-size">{{inform.currentPosition}}</li>
+                                <li class="text-size"><span><i class="fas fa-address-card"></i>
+                                        {{inform.address}}</span></li>
+                                <li class="text-size"><span><i class="fas fa-phone"></i> {{inform.phoneNumber}}</span>
+                                </li>
+                                <li class="text-size"><span><i class="fas fa-envelope-square"></i>
+                                        {{inform.emailAddressInCV}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----education-------->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">{{ 'child1.education' | translate }}</h2>
+                    <div class="col-md-12 text-right" *ngIf="(!isEmployee && isUser) || (isEmployee && isUser) || editAsSale">
+                        <i class="fa fa-plus icon icon-add mx-2 cursor-pointer" aria-hidden="true"
+                            (click)="createEducation()"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row" cdkDropList (cdkDropListDropped)="dropEducation($event)">
+                        <ng-container *ngFor=" let item of listEducation">
+                            <div class="row col-md-12" cdkDrag style="cursor: move;">
+                                <div class="col-md-2 text-right font-weight-bold">
+                                    <span>{{item.startYear}}-{{item.endYear}}</span></div>
+                                <div class="col-md-6 text-left">
+                                    <ul style="list-style-type:none">
+                                        <li class="text-size "><span class="font-weight-bold">School: </span>{{item.schoolOrCenterName}}
+                                            </li>
+                                        <li class="text-size"><span class="font-weight-bold">Degree: </span>
+                                            {{item.degreeType}}</li>
+                                        <li class="text-size"><span class="font-weight-bold">Field: </span>
+                                            {{item.major}}</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4 text-right"
+                                    *ngIf="(!isEmployee && isUser) || (isEmployee && isUser) || editAsSale">
+                                    <i class="fas fa-edit" (click)="editEducation(item)"
+                                        style="margin-right: 15px; "></i>
+                                    <i class="fas fa-trash-alt" (click)="deleteEducation(item)"
+                                        style="cursor: pointer;"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---techinical enterprise-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">{{ 'child1.technical' | translate }}</h2>
+                    <div class="col-md-12 text-right" *ngIf="(!isEmployee && isUser) || (isEmployee && isUser) || editAsSale">
+                        <a (click)="editTechnical(listskill)" style="margin-right: 15px; " *ngIf="groupSkillNumber > 0">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a (click)="createTechnical()" *ngIf="!groupSkillNumber">
+                            <i class="fas fa-edit icon icon-add mx-2 cursor-pointer" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="groupSkillNumber > 0">
+                    <div class="row">
+                        <div class="col-md-8">
+
+                        </div>
+                        <div class="col-md-4" style="text-align: end;">
+                        </div>
+                    </div>
+                    <ng-container *ngFor="let item of listskill.groupSkills">
+                        <div class="row">
+                            <div class="col-md-2 text-right font-weight-bold text-size">{{item.name}}</div>
+                            <div class="col-md-6 text-left">
+                                <ng-container *ngFor="let child of item.cvSkills">
+                                    <ul style="list-style-type:none">
+                                        <li class="text-size">{{child.skillName}}
+                                            <div *ngIf="child.level > 0 || child.level" class="progress">
+                                                <div class="progress-bar" role="progressbar"
+                                                    style="width:{{child.level * 10}}%" aria-valuenow="25"
+                                                    aria-valuemin="0" aria-valuemax="100"
+                                                    ></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------Personal Attribute------------------>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">{{ 'child1.personal' | translate }}</h2>
+                    <div class="col-md-12 text-right" *ngIf="(!isEmployee && isUser) || (isEmployee && isUser) || editAsSale">
+                        <a (click)="createAtribute(listPersonalAtribute)"><i
+                                class="fa fa-plus icon icon-add mx-2 cursor-pointer" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                        <ng-container *ngFor="let item of listPersonalAtribute; let i = index">
+                            <div class ="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8 text-left">
+                                <ul style="list-style-type:none">
+                                    <li class="text-size" [innerHTML]="xuongDong(item)">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-2 text-right" *ngIf="(!isEmployee && isUser) || (isEmployee && isUser) || editAsSale">
+                                <a (click)="editAtribute(listPersonalAtribute,item)" style="margin-right: 15px;"><i
+                                        class="fas fa-edit"></i> </a>
+                                <a (click)="deleteAtribute(i)"><i class="fas fa-trash-alt"
+                                        style="cursor: pointer;"></i></a>
+                            </div>
+                        </div>
+                        </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!----Working Experience---->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">{{ 'child1.working' | translate }}</h2>
+                    <div class="col-md-12 text-right" *ngIf="(!isEmployee && isUser) || (isEmployee && isUser) || editAsSale">
+                        <i class="fa fa-plus icon icon-add mx-2 cursor-pointer" aria-hidden="true"
+                            (click)="createWorkingExp()"></i> 
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row" cdkDropList (cdkDropListDropped)="dropWorking($event)">
+                        <ng-container *ngFor=" let item of workingExperience">
+                            <div class="row col-md-12 keotha" style="cursor: move;" cdkDrag>
+                                <div class="col-md-2 text-right font-weight-bold">
+                                    <span>{{item.startTime | date: 'MM/yyyy' }} -
+                                        
+                                    </span>
+                                    <span *ngIf="item.endTime">
+                                        {{item.endTime | date: 'MM/yyyy'}}
+                                    </span>
+                                    <span *ngIf="!item.endTime">
+                                        Now
+                                    </span>
+                                </div>
+                                <div class="col-md-6 text-left">
+                                    <ul style="list-style-type:none">
+                                        <li class=" text-size"><span class="font-weight-bold">Project Name :
+                                            </span>{{item.projectName}}</li>
+                                        <li class="text-size"><span class="font-weight-bold">Position : </span>
+                                            {{item.position}}</li>
+                                        <li class="text-size"><span class="font-weight-bold">Technologies : </span>
+                                            {{item.technologies}}</li>
+                                        <li class="text-size"><span class="font-weight-bold">Project Description : </span>
+                                            <ul style="list-style-type:none">
+                                                <li [innerHTML]="xuongDong(item.projectDescription)"></li>
+                                            </ul>
+                                        </li>
+                                        <li class="text-size"><span class="font-weight-bold">My responsibilities :
+                                            </span>
+                                            <ul style="list-style-type:none">
+                                                <li [innerHTML]="xuongDong(item.responsibility)"></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4 text-right"
+                                    *ngIf="(!isEmployee && isUser) || (isEmployee && isUser) || editAsSale">
+                                    <i class="fas fa-edit" style="margin-right: 15px; "
+                                        (click)="editWorkingExp(item)"></i>
+                                    <i class="fas fa-trash-alt" style="cursor: pointer;"
+                                        (click)="deleteWorkingExp(item)"></i>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</div>

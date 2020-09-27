@@ -1,0 +1,171 @@
+<div [@routerTransition]>
+    <section class="content-header">
+      <div class="container-fluid content-gachchan">
+        <div class="row">
+          <div class="col-6" style="font-family: auto;">
+            <h1>{{ 'childrenMenu.child2' | translate }}</h1>
+          </div>
+          <div class="col-6 text-right m-r-3" style="margin-bottom: 5px;">
+            <button type="button" class = "btn btn-danger" (click) = "createCandidate()">{{ 'child2.create' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content px-2">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-header">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button type="button" class="btn bg-red" (click)="refresh()"><i class="fas fa-search"></i></button>
+              </div>
+              <input type="text" class="form-control"  name="keyword"  [placeholder]="'child2.searchbyname' | translate" [(ngModel)]="keyword"/>
+              <div class="input-group-append">
+                <button type="button" class="btn btn-danger" (click)="advancedFiltersVisible = !advancedFiltersVisible">{{ 'child2.advance' | translate}}
+                  <i class="fas"
+                    [class.fa-angle-up]="advancedFiltersVisible"
+                    [class.fa-angle-down]="!advancedFiltersVisible"
+                  ></i>
+                </button>
+              </div>
+            </div>
+            <!---search advance-->
+            <div *ngIf="advancedFiltersVisible">
+              <div class="card-body">
+                <form [formGroup]="searchForm">
+                  <div class="row">
+                    <div class="col-md-6"><!---skill-->
+                      <mat-form-field appearance="outline" class="form-search w-90">
+                        <mat-label>{{ 'child2.skill' | translate}} </mat-label>
+                        <input matInput autocomplete="off" placeholder="skill" formControlName="skill">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline" class="form-search w-90">
+                        <mat-label>{{ 'child2.branch' | translate}}</mat-label>
+                        <mat-select formControlName="branch">
+                          <mat-option *ngFor = "let item of branch " [value]="item.id">{{item.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                   </div>
+                  
+                   <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="form-search w-90">
+                      <mat-label>{{ 'child2.collectmonth' | translate}}</mat-label>
+                      <mat-select formControlName="collectedMonth">
+                        <mat-option *ngFor = "let op of listThang.options" [value]="op.id">{{op.value}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline" class="form-search w-90">
+                        <mat-label>{{ 'child2.collectyear' | translate}}</mat-label>
+                        <mat-select formControlName="collectedYear">
+                          <mat-option  *ngFor = "let op of listNam.options" [value]="op.id">{{op.value}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <!-- <div class="col-md-6"></div> -->
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline" class="form-search w-90">
+                        <mat-label>{{'child2.status' | translate}}</mat-label>
+                        <mat-select formControlName="status">
+                          <mat-option *ngFor = "let item of status " [value]="item.value">{{item.valueVN}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                   </div>
+                    
+                </div>
+                </form>
+            
+              </div>
+              </div>
+              <div class="card-footer" *ngIf="advancedFiltersVisible">
+                <div class ="float-right">
+                <button type="button" class="btn bg-red" (click)="refresh()">
+                  {{ 'child2.search' | translate }}
+                </button>
+                <button type="button" class="btn btn-secondary"  style="margin-left: 5px;" (click)="clearFilters()">
+                  {{ 'child2.clear' | translate }}
+                </button></div>
+              </div>
+            </div>
+          </div>
+          <!------table-->
+          <div class="card-body table-responsive p-0">
+            <p class="mb-0 my-2" *ngIf = "listCandidate.length > 0">
+              {{ 'child2.total' | translate }}: {{ totalItems }}
+            </p>
+            <p class="mb-0 my-2" *ngIf = "listCandidate.length == 0">
+              {{ 'child2.meaasge' | translate }}
+            </p>
+            <table class="table table-hover text-nowrap">
+              <thead class="bg-light">
+                <tr>
+                  <th>{{ 'child2.stt' | translate }}</th>
+                  <th>{{ 'child2.name' | translate }}</th>
+                  <th>{{ 'child2.email' | translate }}</th>
+                  <th>{{ 'child2.phone' | translate }}</th>
+                  <th>{{ 'child2.branch' | translate }}</th>
+                  <th>{{ 'child2.position' | translate }}</th>
+                  <th>{{ 'child2.status' | translate }}</th>
+                  <th>{{ 'child2.createtime' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <tr
+                  *ngFor="let candidate of (listCandidate |paginate: {id: 'server', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: totalItems}); let index = index" >
+                  <td>{{index + 1 + (pageNumber - 1) * pageSize}}</td>
+                  <td class= "link" (click) = "detailCandidate(candidate.id)">{{ candidate.fullName }}</td>
+                  <td>{{ candidate.email }}</td>
+                  <td>{{ candidate.phone}}</td>
+                  <td>{{ candidate.branchName}}</td>
+                  <td>{{ candidate.applyPosition}}</td>
+                  <td>{{ candidate.statusName}}</td>
+                  <td>{{ candidate.creationTime | date: 'dd/MM/yyyy' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer bg-light border-top">
+            <div class="row">
+              <div class="div" style="display: flex; align-items: center;">
+                <div>
+                  <mat-form-field style="margin-top: 10px; width: 70%;" appearance="outline">
+                    <mat-label>{{ 'child3.maxresult' | translate}}</mat-label>
+                    <mat-select [(ngModel)]="pageSizeType" (ngModelChange)="changePageSize()">
+                        <mat-option [value]="5">
+                            5
+                        </mat-option>
+                        <mat-option [value]="10">
+                            10
+                        </mat-option>
+                        <mat-option [value]="50">
+                            50
+                        </mat-option>
+                        <mat-option [value]="100">
+                            100
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="float-sm-right m-auto" style="padding-top: 14px; margin-top: 0 !important
+                ">
+                  <abp-pagination-controls
+                    id="server"
+                    (pageChange)="getDataPage($event)"
+                  >
+                  </abp-pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- </div> -->
+    </section>
+  </div>
+  
+

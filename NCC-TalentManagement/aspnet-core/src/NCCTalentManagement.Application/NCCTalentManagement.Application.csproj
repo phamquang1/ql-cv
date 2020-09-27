@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <VersionPrefix>1.0.0.0</VersionPrefix>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>NCCTalentManagement.Application</AssemblyName>
+    <PackageId>NCCTalentManagement.Application</PackageId>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace>NCCTalentManagement</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DocX" Version="1.7.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+    <PackageReference Include="System.IO.Packaging" Version="4.7.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NCCTalentManagement.Core\NCCTalentManagement.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Pdf.v19.2.Core">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DevExpress 19.2\Components\Bin\Standard\DevExpress.Pdf.v19.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v19.2.Core">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DevExpress 19.2\Components\Bin\Standard\DevExpress.RichEdit.v19.2.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

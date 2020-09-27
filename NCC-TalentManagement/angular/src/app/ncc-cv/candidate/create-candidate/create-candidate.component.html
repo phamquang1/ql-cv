@@ -1,0 +1,285 @@
+<div style="padding-left: 10px; padding-right: 5px;">
+    <section class="content-header ">
+        <div class="container-fluid content-gachchan">
+            <div class="row pb-2">
+                <div class="col-6" style="font-family: auto ">
+                    <h1>{{title | translate }}</h1>
+                </div>
+                <div class="col-6" style="text-align: end;">
+                    <button type="button" class="btn btn-danger" (click) = "saveCV()">{{'child2.createOrdetail.save' | translate}}</button>
+                    <button *ngIf = "isEdit" type="button" class="btn btn-primary" (click) = "deleteCV()" style="margin-left: 5px">{{'child2.createOrdetail.delete' | translate}}</button>
+                    <button type="button" class="btn btn-secondary" style="margin-left: 5px" (click)="exit()">
+                        <i class="fas fa-reply" style="padding-right: 5px;" ></i>{{'child2.createOrdetail.exit' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Thông tin cá nhân---->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class= "card-title">{{'child2.createOrdetail.infor' | translate}}*</h5>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="createCandidateForm">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class=" form-search w-80" >
+                                    <mat-label>{{'child2.createOrdetail.fullname' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" placeholder="fullName" formControlName="fullName"   required >
+                                    <mat-error>{{'child2.createOrdetail.messageName' | translate}}</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!---số điện thoại-->
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class=" form-search w-80">
+                                    <mat-label>{{'child2.createOrdetail.phone' | translate}}</mat-label>
+                                    <input matInput autocomplete="off" placeholder="phone" formControlName="phone" type="number" required>
+                                </mat-form-field>
+                            </div>
+                            <!----Email-->
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class=" form-search w-80">
+                                    <mat-label>{{'child2.createOrdetail.email' | translate}} </mat-label>
+                                    <input type= "email" matInput autocomplete="off" placeholder="email" formControlName="email" required>
+                                    <mat-error>email không hợp lệ</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------thông tin ứng viên------------------>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class= "card-title">{{'child2.createOrdetail.inforApply' | translate }}*</h5>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="createCandidateForm">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class="form-search w-80">
+                                    <mat-label>{{'child2.createOrdetail.position' | translate }}</mat-label>
+                                    <mat-select formControlName="positionId" required>
+                                        <mat-option *ngFor="let item of position" [value]="item.id">{{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <!---- văn phòng-->
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class=" form-search w-80">
+                                    <mat-label>{{'child2.createOrdetail.office' | translate }}</mat-label>
+                                    <mat-select formControlName="branchId" required>
+                                        <mat-option *ngFor="let item of branch" [value]="item.id">{{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <!---ngày nhận CV-->
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class=" form-search w-80">
+                                    <mat-label>{{'child2.createOrdetail.recieveDay' | translate }}</mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="receiveTime">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <!--ngày phỏng vấn-->
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class=" form-search w-80">
+                                    <mat-label>{{'child2.createOrdetail.interviewDay' | translate }}</mat-label>
+                                    <input matInput [matDatepicker]="picker1" formControlName="interviewTime">
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker1></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <!---Ngày đi làm -->
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class=" form-search w-80">
+                                    <mat-label>{{'child2.createOrdetail.workDay' | translate }}</mat-label>
+                                    <input matInput  [matDatepicker]="picker2" formControlName="startWorkingTime">
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <!---Trạng thái-->
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class=" form-search w-80">
+                                    <mat-label>{{'child2.createOrdetail.status' | translate }}</mat-label>
+                                    <mat-select formControlName="status" required>
+                                        <mat-option *ngFor="let item of status" [value]="item.key">
+                                            {{item.valueVN}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <!----Người phỏng vấn-->
+                            <div class="col-sm-4">
+                                  <mat-form-field class="form-search w-80" appearance="outline">
+                                    <mat-label>{{'child2.createOrdetail.interviewer' | translate }}</mat-label>
+                                    <mat-chip-list #chipList aria-label="Fruit selection">
+                                        <mat-chip
+                                             *ngFor="let item of listInterViewFilter"
+                                              [selectable]="selectable"
+                                              [removable]="removable"
+                                              (removed)="remove(item,'isInterview')">
+                                                   {{item}}
+                                               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                        </mat-chip>
+                                    
+                                        <input  type="text" formControlName="interviewerName"  matInput  #fruitInput
+                                        [matAutocomplete]="auto"
+                                        [matChipInputFor]="chipList"
+                                        (keyup)="onKey($event.target.value,'isInterview')" 
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+                                    </mat-chip-list>
+                                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event,'isInterview')">
+                                        <mat-option  *ngFor="let item of listInterview" [value]="item.name">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                 </mat-form-field> 
+                                 <!-------->
+                            </div>
+                            <!---tệp đính kèm-->
+                            <div class="col-sm-4">
+                                <div class="row">
+                                  <div class="col-sm-4"><span>{{'child2.createOrdetail.file' | translate }}*:</span></div>
+                                  <div class="col-sm-8">
+                                    <label for="myFile2" class="btn btn-danger" *ngIf = "fileName === ''">{{'child2.createOrdetail.choose' | translate }}</label>
+                                    <input accept=".docx, .doc"  onclick="this.value = null" hidden type="file" id="myFile2" (change)="getFile($event)" />
+                                    <span *ngIf="fileName == '' && isSave" style="color: red">&nbsp;{{'child2.createOrdetail.messageFile' | translate }}</span>
+                                    <table *ngIf ="fileName !== '' ">
+                                      <tr class="text-padding">
+                                        <td><a [href]="urlImg + '/' + filepath" [download]="fileName" target="_blank">{{fileName}}</a></td>
+                                        <td><i class="fas fa-times text-danger" style="padding-left:5px ;" (click)="deleteFile()"></i></td>
+                                        </tr>
+                                    </table>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!----trình độ ứng viên---->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class= "card-title">{{'child2.createOrdetail.degree' | translate }}</h5>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="createCandidateForm">
+                        <div class="row" style="margin-bottom: 20px;">
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class=" form-search w-80">
+                                    <mat-label>{{'child2.createOrdetail.degreeCandidate' | translate }}</mat-label>
+                                    <mat-select formControlName="degreeType">
+                                        <mat-option *ngFor="let item of listTrinhdo.options" [value]="item.id">
+                                            {{item.value}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <!----kĩ năng của ứng viên-->
+                            <div class="col-sm-4">
+                                <mat-form-field class="example-full-width w-80" appearance="outline">
+                                    <mat-label>{{'child2.createOrdetail.skillCandidate' | translate }}</mat-label>
+                                    <mat-chip-list #chipList1 aria-label="Fruit selection">
+                                        <mat-chip
+                                             *ngFor="let item of listSkillFilter"
+                                              [selectable]="selectable"
+                                              [removable]="removable"
+                                              (removed)="remove(item,'isSkill')">
+                                                   {{item}}
+                                               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                        </mat-chip>
+                                        <input type="text" formControlName="skillName"  matInput #fruitInput1
+                                               [matAutocomplete]="auto1"
+                                               [matChipInputFor]="chipList1"
+                                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                               (keyup)="onKey($event.target.value,'isSkill')">
+                                    </mat-chip-list>
+                                        <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="selected($event,'isSkill')">
+                                        <mat-option  *ngFor="let item of listSkillForCandidates" [value]="item.name">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                 </mat-form-field>
+                            </div>
+                            <!---Kinh nghiệm làm việc-->
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class="form-search w-80">
+                                    <mat-label>{{'child2.createOrdetail.exprerience' | translate }}</mat-label>
+                                    <textarea matInput autocomplete="off"  formControlName="workExperience"></textarea>
+                                </mat-form-field>
+                            </div>
+                            <!--- nguồn nhận Cv-->
+                            <div class="col-sm-4">
+                                <mat-form-field appearance="outline" class="form-search w-80">
+                                    <mat-label>{{'child2.createOrdetail.source' | translate }}</mat-label>
+                                    <input matInput autocomplete="off"  formControlName="source">
+                                </mat-form-field>
+                            </div>
+                            <!---người giới thiệu Cv-->
+                            <div class="col-sm-4">
+                                <mat-form-field class="example-full-width w-80" appearance="outline">
+                                    <mat-label>{{'child2.createOrdetail.present' | translate }}</mat-label>
+                                       <input type="text" formControlName="presenteName"  matInput
+                                                    [matAutocomplete]="auto2" 
+                                                    (keyup)="onKey($event.target.value,'isPresent')">
+                                        <mat-autocomplete #auto2="matAutocomplete">
+                                        <mat-option  *ngFor="let item of listPresent" [value]="item.name">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                 </mat-form-field>
+                            </div>
+                            <!----cv  đã từng ứng tuyển-->
+                            <div class="col-sm-4">
+                                <mat-form-field class="example-full-width w-80" appearance="outline">
+                                    <mat-label>{{'child2.createOrdetail.oldcv' | translate }}</mat-label>
+                                        <input type="text" formControlName="oldCVName"  matInput 
+                                               [matAutocomplete]="auto3" 
+                                               (keyup)="onKey($event.target.value,'isOldCV')">
+                                        <mat-autocomplete #auto3="matAutocomplete" >
+                                        <mat-option  *ngFor="let item of listOldCv" [value]="item.name">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                 </mat-form-field>
+                            </div>
+                            <!--- ảnh kết quả bài test ứng viên-->
+                            <div class="col-sm-4">
+                                <span>{{'child2.createOrdetail.photo' | translate }} : </span>
+                                <label for="myImg" class="btn btn-danger">{{'child2.createOrdetail.choose' | translate }}</label>
+                                <input hidden type="file" id="myImg" onclick="this.value = null" (change)="changeImage($event)" multiple accept=".jpg, .png" />
+                            </div>
+                            <div class="col-sm-4">
+                                <table>
+                                    <tr class="text-padding" *ngFor="let name of filesImgName ; let i = index">
+                                      <td><a >Ảnh {{i + 1}}</a></td>
+                                      <td><i class="fas fa-times text-danger" style="padding-left:5px ;" (click)="deleteFileImg(i)"></i></td>
+                                      </tr>
+                                  </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 wapper-img" *ngFor="let img of filesImgDisplay" >
+                                <img [src]="img.buffer" alt="" style="width: 100%; height: 90%;" >
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

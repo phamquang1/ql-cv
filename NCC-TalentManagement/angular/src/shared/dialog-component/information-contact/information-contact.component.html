@@ -1,0 +1,94 @@
+<div class="row clearfix ncc_wminwwidth" >
+    <div class="content-header content-profile col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>{{ 'child1.inforDialog.titleedit' | translate}} : {{inform.surname}} {{inform.name}}</h4>
+            </div>
+            <div class="card-body max-height">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="profile-wapper">
+                            <div class="profile-avt" *ngIf="showImg">
+                                <img [src]="urlImg + '/' + inform.imgPath" alt="" accept=".jpg, .png">
+                            </div>
+                            <div class="profile-avt" *ngIf="!showImg">
+                                <img [src]="img.buffer" alt="" >
+                            </div>
+                            <div class="profile-address">
+                                <input type="button" value="{{ 'child1.inforDialog.choosePhoto' | translate}}" style="width: 90%;"
+                                        onclick="document.getElementById('uploadImages').click();" />
+                                <input type="file" (change)="changeInmage($event)" id="uploadImages">
+                                <input *ngIf="img.buffer || inform.imgPath" type="button" value="{{ 'child1.inforDialog.deletePhoto' | translate}}" style="width: 90%;" (click)="deleteImage()"/>
+                                <!-- -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row clearfix">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline" style="margin-right: 5px;" class="w-100">
+                                    <mat-label>{{ 'child1.inforDialog.surname' | translate}}</mat-label>
+                                    <input matInput [(ngModel)]="inform.surname" name="surname" required autocomplete="off">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>{{ 'child1.inforDialog.name' | translate}}</mat-label>
+                                    <input matInput [(ngModel)]="inform.name" name="name" required autocomplete="off">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <mat-form-field appearance="outline" class="w-100" >
+                                    <mat-label>{{ 'child1.inforDialog.position' | translate}}</mat-label>
+                                    <mat-select [(ngModel)]="inform.currentPosition" name="currentPosition" required >
+                                      <mat-option *ngFor="let pos of position" [value]="pos.id">{{pos.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <mat-form-field appearance="outline" class="w-100" autocomplete="off" >
+                                    <mat-label>{{ 'child1.inforDialog.branch' | translate}}</mat-label>
+                                    <mat-select [(ngModel)]="inform.branch" name="branch" required >
+                                      <mat-option *ngFor="let br of branch" [value]="br.id">{{br.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <mat-form-field appearance="outline" class="w-100" autocomplete="off">
+                                    <mat-label>{{ 'child1.inforDialog.address' | translate}}</mat-label>
+                                    <textarea matInput [(ngModel)]="inform.address" name="address" autocomplete="off"></textarea>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <mat-form-field appearance="outline" class="w-100" autocomplete="off">
+                                    <mat-label>{{ 'child1.inforDialog.phone' | translate}}</mat-label>
+                                    <input matInput [(ngModel)]="inform.phoneNumber" name="phoneNumber" autocomplete="off" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <mat-form-field appearance="outline" class="w-100" autocomplete="off">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput [(ngModel)]="inform.emailAddressInCV" name="emailAddressInCV" autocomplete="off" required>
+                                </mat-form-field>
+                            </div>
+                        </div>             
+                    </div>          
+                </div>
+            </div> 
+        </div>
+        <div class="row clearfix" style="float: right;">
+            <button type="button" class="btn btn-danger" (click)="submitInfoContact()"  style="margin-right: 10px;">{{ 'child1.save' | translate}}</button>
+            <button type="button" class="btn btn-secondary" [mat-dialog-close]="inform">{{ 'child1.cancel' | translate}}</button>
+        </div>
+    </div>
+</div>
